@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { submitLogin } from '../redux/actions';
 
 class Login extends Component {
   constructor(props) {
@@ -9,11 +12,21 @@ class Login extends Component {
       email: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const { name, email } = this.state;
+    const { onSubmit } = this.props;
+    const personalData = { email, name };
+
+    onSubmit(personalData);
   }
 
   render() {
@@ -23,7 +36,7 @@ class Login extends Component {
     const isDisabled = !name || !email || !isValidEmail;
 
     return (
-      <form>
+      <form onSubmit={ this.handleSubmit }>
         <label htmlFor="name">
           <input
             name="name"
@@ -46,6 +59,7 @@ class Login extends Component {
           />
         </label>
         <button
+          type="submit"
           disabled={ isDisabled }
           data-testid="btn-play"
         >
@@ -56,4 +70,19 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  name: state.player.name,
+  email: state.player.email,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (data) => {
+    dispatch(submitLogin(data));
+  },
+});
+
+Login.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
