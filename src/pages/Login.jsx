@@ -23,10 +23,18 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const { name, email } = this.state;
-    const { onSubmit } = this.props;
+    const { onSubmit, history } = this.props;
     const personalData = { email, name };
 
     onSubmit(personalData);
+    history.push('/game');
+  }
+
+  async handleClick() {
+    const api = 'https://opentdb.com/api_token.php?command=request';
+    const response = await fetch(api);
+    const data = await response.json();
+    localStorage.setItem('token', data.token);
   }
 
   render() {
@@ -62,6 +70,7 @@ class Login extends Component {
           type="submit"
           disabled={ isDisabled }
           data-testid="btn-play"
+          onClick={ this.handleClick }
         >
           Play
         </button>
@@ -83,6 +92,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
