@@ -1,8 +1,8 @@
 const initialState = {
-  name: '', // nome-da-pessoa,
-  assertions: 0, // número-de-acertos,
-  score: 0, // pontuação,
-  gravatarEmail: '', // email-da-pessoa,
+  name: '',
+  assertions: 0,
+  score: 0,
+  gravatarEmail: '',
 };
 
 const player = (state = initialState, action) => {
@@ -11,8 +11,8 @@ const player = (state = initialState, action) => {
     return {
       ...state,
       name: action.payload.name,
-      email: action.payload.email,
-      score: action.payload.score,
+      assertions: action.payload.assertions || 0,
+      score: action.payload.score || 0, // ADICIONEI O 0 POIS QUANDO REALIZA O LOGIN NAO RECEBE SCORE NO PAYLOAD, RETORNAVA UNDEFINED
       gravatarEmail: action.payload.gravatarEmail,
     };
   default:
