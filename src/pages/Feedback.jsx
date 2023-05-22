@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 class Feedback extends Component {
   render() {
-    const { assertions } = this.props;
-    console.log(assertions);
+    const { assertions, score } = this.props;
+    // console.log(assertions);
     const assert = 3;
     return (
       <div>
@@ -13,6 +13,17 @@ class Feedback extends Component {
         {assertions < assert
           ? <span data-testid="feedback-text">Could be better...</span>
           : <span data-testid="feedback-text">Well Done!</span>}
+
+        <div>
+          <div>
+            <h3>Placar Final</h3>
+            <p data-testid="feedback-total-score">{score}</p>
+          </div>
+        </div>
+        <div>
+          <h3>Acertos</h3>
+          <p data-testid="feedback-total-question">{assertions}</p>
+        </div>
       </div>
     );
   }
@@ -20,10 +31,12 @@ class Feedback extends Component {
 
 const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
+  score: state.player.score,
 });
 
 Feedback.propTypes = {
-  assertions: PropTypes.number.isRequired,
-};
+  assertions: PropTypes.number,
+  score: PropTypes.number,
+}.isRequired;
 
 export default connect(mapStateToProps)(Feedback);
