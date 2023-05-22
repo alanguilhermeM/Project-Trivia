@@ -13,7 +13,7 @@ const player = (state = initialState, action) => {
       name: action.payload.name,
       email: action.payload.email,
       score: action.payload.score,
-      gravatarEmail: action.payload.gravatar,
+      gravatarEmail: action.payload.gravatarEmail,
     };
   default:
     return state;
