@@ -8,7 +8,7 @@ class Feedback extends Component {
     // console.log(assertions);
     const assert = 3;
     return (
-      <div>
+      <div className="App">
         <h1>Feedback</h1>
         {assertions < assert
           ? <span data-testid="feedback-text">Could be better...</span>
