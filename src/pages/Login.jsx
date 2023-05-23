@@ -26,7 +26,6 @@ class Login extends Component {
     const { name, email } = this.state;
     const { onSubmit, history } = this.props;
     const personalData = { email, name };
-
     onSubmit(personalData);
     history.push('/game');
   }
@@ -40,6 +39,7 @@ class Login extends Component {
 
   render() {
     const { name, email } = this.state;
+    const { history } = this.props;
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const isValidEmail = emailRegex.test(email);
     const isDisabled = !name || !email || !isValidEmail;
@@ -76,6 +76,13 @@ class Login extends Component {
             onClick={ this.handleClick }
           >
             Play
+          </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => history.push('/settings') }
+          >
+            Configurações
           </button>
         </form>
       </div>
