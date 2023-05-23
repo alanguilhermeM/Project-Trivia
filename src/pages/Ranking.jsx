@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 class Ranking extends Component {
- // render() {
-    //handleLoginClick = () => {
-     // const { history } = this.props;
-    //  history.push('/');
+  render() {
+    handleLoginClick = () => {
+      const { history } = this.props;
+      history.push('/');
     };
     return (
       <div>
@@ -13,6 +13,10 @@ class Ranking extends Component {
     );
   }
 }
-//Ranking.propTypes = { history : React.PropTypes.arrayOf(React.PropTypes.}
 
+Ranking.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 export default Ranking;
