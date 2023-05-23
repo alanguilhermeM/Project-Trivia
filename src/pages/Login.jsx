@@ -5,37 +5,47 @@ import { submitLogin } from '../redux/actions';
 import logo from '../trivia.png';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      name: '',
-      email: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  //   this.state = {
+  //     name: '',
+  //     email: '',
+  //   };
+  //   this.handleChange = this.handleChange.bind(this);
+  //   // this.handleSubmit = this.handleSubmit.bind(this);
+  // }
 
-  handleChange({ target }) {
+  state = {
+    name: '',
+    email: '',
+  };
+
+  handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
-  }
+  };
 
-  handleSubmit(e) {
-    e.preventDefault();
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   const { name, email } = this.state;
+  //   const { onSubmit, history } = this.props;
+  //   const personalData = { email, name };
+  //   onSubmit(personalData);
+  //   history.push('/game');
+  // }
+
+  handleClick = async () => {
+    const api = 'https://opentdb.com/api_token.php?command=request';
+    const response = await fetch(api);
+    const data = await response.json();
+    localStorage.setItem('token', data.token);
     const { name, email } = this.state;
     const { onSubmit, history } = this.props;
     const personalData = { email, name };
     onSubmit(personalData);
     history.push('/game');
-  }
-
-  async handleClick() {
-    const api = 'https://opentdb.com/api_token.php?command=request';
-    const response = await fetch(api);
-    const data = await response.json();
-    localStorage.setItem('token', data.token);
-  }
+  };
 
   render() {
     const { name, email } = this.state;
@@ -46,7 +56,7 @@ class Login extends Component {
 
     return (
       <div className="App">
-        <form onSubmit={ this.handleSubmit } className="App-header">
+        <form className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
           <p>SUA VEZ</p>
           <label htmlFor="name">
@@ -70,7 +80,7 @@ class Login extends Component {
             />
           </label>
           <button
-            type="submit"
+            type="button"
             disabled={ isDisabled }
             data-testid="btn-play"
             onClick={ this.handleClick }
