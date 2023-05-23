@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submitLogin } from '../redux/actions';
+import logo from '../trivia.png';
 
 class Login extends Component {
   constructor(props) {
@@ -44,37 +45,40 @@ class Login extends Component {
     const isDisabled = !name || !email || !isValidEmail;
 
     return (
-      <form onSubmit={ this.handleSubmit }>
-        <label htmlFor="name">
-          <input
-            name="name"
-            type="text"
-            placeholder="Nome"
-            data-testid="input-player-name"
-            value={ name }
-            onChange={ this.handleChange }
-          />
-        </label>
-
-        <label>
-          <input
-            name="email"
-            type="email"
-            placeholder="email"
-            data-testid="input-gravatar-email"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <button
-          type="submit"
-          disabled={ isDisabled }
-          data-testid="btn-play"
-          onClick={ this.handleClick }
-        >
-          Play
-        </button>
-      </form>
+      <div className="App">
+        <form onSubmit={ this.handleSubmit } className="App-header">
+          <img src={ logo } className="App-logo" alt="logo" />
+          <p>SUA VEZ</p>
+          <label htmlFor="name">
+            <input
+              name="name"
+              type="text"
+              placeholder="Nome"
+              data-testid="input-player-name"
+              value={ name }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <label>
+            <input
+              name="email"
+              type="email"
+              placeholder="email"
+              data-testid="input-gravatar-email"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <button
+            type="submit"
+            disabled={ isDisabled }
+            data-testid="btn-play"
+            onClick={ this.handleClick }
+          >
+            Play
+          </button>
+        </form>
+      </div>
     );
   }
 }
