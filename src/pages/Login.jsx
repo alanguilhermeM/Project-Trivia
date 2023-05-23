@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { submitLogin } from '../redux/actions';
 
 class Login extends Component {
@@ -13,6 +14,7 @@ class Login extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClickSettings = this.handleClickSettings.bind(this);
   }
 
   handleChange({ target }) {
@@ -25,7 +27,6 @@ class Login extends Component {
     const { name, email } = this.state;
     const { onSubmit, history } = this.props;
     const personalData = { email, name };
-
     onSubmit(personalData);
     history.push('/game');
   }
@@ -35,6 +36,11 @@ class Login extends Component {
     const response = await fetch(api);
     const data = await response.json();
     localStorage.setItem('token', data.token);
+  }
+
+  handleClickSettings() {
+    const { history } = this.props;
+    history.push('/settings');
   }
 
   render() {
@@ -73,6 +79,13 @@ class Login extends Component {
           onClick={ this.handleClick }
         >
           Play
+        </button>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          /* onClick={ this.handleClickSettings } */
+        >
+          <Link to="/settings">Configurações</Link>
         </button>
       </form>
     );
