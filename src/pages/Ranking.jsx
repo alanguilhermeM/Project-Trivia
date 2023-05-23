@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Ranking extends Component {
+  handleLoginClick = () => {
+    const { history } = this.props;
+    history.push('/');
+  };
+
   render() {
-    handleLoginClick = () => {
-      const { history } = this.props;
-      history.push('/');
-    };
     return (
       <div>
         <h1>Ranking</h1>
+        <button
+          type="submit"
+          data-testid="btn-go-home"
+          onClick={ this.handleLoginClick }
+        >
+          Home
+        </button>
       </div>
     );
   }
