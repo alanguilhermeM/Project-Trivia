@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { submitLogin } from '../redux/actions';
 
 class Login extends Component {
@@ -38,13 +37,9 @@ class Login extends Component {
     localStorage.setItem('token', data.token);
   }
 
-  handleClickSettings() {
-    const { history } = this.props;
-    history.push('/settings');
-  }
-
   render() {
     const { name, email } = this.state;
+    const { history } = this.props;
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const isValidEmail = emailRegex.test(email);
     const isDisabled = !name || !email || !isValidEmail;
@@ -83,9 +78,9 @@ class Login extends Component {
         <button
           type="button"
           data-testid="btn-settings"
-          /* onClick={ this.handleClickSettings } */
+          onClick={ () => history.push('/settings') }
         >
-          <Link to="/settings">Configurações</Link>
+          Configurações
         </button>
       </form>
     );
