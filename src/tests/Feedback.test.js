@@ -2,6 +2,8 @@ import { createMemoryHistory } from 'history';
 import { screen } from '@testing-library/react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import Feedback from '../pages/Feedback';
+import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 
 describe('Testa a tela de Feedback', () => {
   it('Testa a rota da página de Feedback', () => {
@@ -45,4 +47,21 @@ describe('Testa a tela de Feedback', () => {
       expect(msg.textContent).toBe('Well Done!')
     }
   })
+
+  it('Testa se é exibido um botão de Ranking', () => {
+    renderWithRouterAndRedux(<Feedback />)
+
+    const btn = screen.getByRole('button', {  name: /ranking/i});
+    expect(btn).toBeInTheDocument();
+  })
+
+  // it('Testa se ao clicar em Ranking, a rota renderizada é /ranking', () => {
+  //   const { history } = renderWithRouterAndRedux(<Feedback />)
+
+  //   const btn = screen.getByRole('button', {  name: /ranking/i});
+  //   act(() => userEvent.click(btn));
+
+  //   const { pathname } = history.location;
+  //   expect(pathname).toBe('/ranking');
+  // })
 })
