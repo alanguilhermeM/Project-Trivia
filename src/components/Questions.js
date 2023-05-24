@@ -11,6 +11,7 @@ class Questions extends Component {
     timeRemaining: 30,
     disabled: false,
     redButtonStates: [],
+    next: false,
   };
 
   timer = null;
@@ -78,6 +79,7 @@ class Questions extends Component {
         button.style.border = '3px solid red';
       });
       this.scorePts();
+      this.setState({ next: true });
     }
     if (target.className === 'red') {
       const index = parseInt(target.getAttribute('data-index'), 10);
@@ -85,7 +87,7 @@ class Questions extends Component {
       this.setState((prevState) => {
         const newRedButtonStates = [...prevState.redButtonStates];
         newRedButtonStates[index] = true;
-        return { redButtonStates: newRedButtonStates };
+        return { redButtonStates: newRedButtonStates, next: true };
       });
 
       const redButton = target;
@@ -159,7 +161,7 @@ class Questions extends Component {
 
   render() {
     const { perguntas, indiceAtual,
-      perguntasCarregadas, timeRemaining, disabled } = this.state;
+      perguntasCarregadas, timeRemaining, disabled, next } = this.state;
     const perguntaAtual = perguntas[indiceAtual];
     return (
       <div>
@@ -198,11 +200,15 @@ class Questions extends Component {
             </div>
           </div>
         ) : null}
-        <div>
-          Time Remaining:
-          {' '}
-          {timeRemaining}
-        </div>
+        {
+          next ? <button data-testid="btn-next">Next</button> : (
+            <div>
+              Time Remaining:
+              {' '}
+              {timeRemaining}
+            </div>
+          )
+        }
         {' '}
       </div>
     );
