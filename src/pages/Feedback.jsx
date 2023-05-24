@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 class Feedback extends Component {
   render() {
-    const { assertions, score } = this.props;
+    const { assertions, score, history } = this.props;
     // console.log(assertions);
     const assert = 3;
     return (
@@ -25,6 +25,20 @@ class Feedback extends Component {
           <h3>Acertos</h3>
           <p data-testid="feedback-total-question">{assertions}</p>
         </div>
+        <button
+          data-testid="btn-ranking"
+          onClick={ () => history.push('/ranking') }
+        >
+          Ranking
+
+        </button>
+        <button
+          data-testid="btn-play-again"
+          onClick={ () => history.push('/') }
+        >
+          Play Again
+
+        </button>
       </div>
     );
   }
