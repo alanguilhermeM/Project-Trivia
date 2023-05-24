@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Header from '../components/Header';
 
 class Feedback extends Component {
   render() {
@@ -9,11 +10,11 @@ class Feedback extends Component {
     const assert = 3;
     return (
       <div className="App">
+        <Header />
         <h1>Feedback</h1>
         {assertions < assert
           ? <span data-testid="feedback-text">Could be better...</span>
           : <span data-testid="feedback-text">Well Done!</span>}
-
         <div>
           <div>
             <h3>Placar Final</h3>
