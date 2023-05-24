@@ -10,6 +10,12 @@ export const submitLogin = (payload) => {
   };
 };
 
+export const SCORE = 'SCORE';
+
+export const playerScore = (score) => ({
+  type: SCORE,
+  score,
+});
 export const RESET_SCORE = 'RESET_SCORE';
 
 export const ResetScore = () => ({
