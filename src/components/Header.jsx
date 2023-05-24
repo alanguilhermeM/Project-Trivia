@@ -7,7 +7,7 @@ class Header extends Component {
     const { name, gravatarEmail, score } = this.props;
     const gravatarProfilePic = `https://www.gravatar.com/avatar/${gravatarEmail}`;
     return (
-      <header className="App-header">
+      <header>
         <img
           data-testid="header-profile-picture"
           src={ gravatarProfilePic }
