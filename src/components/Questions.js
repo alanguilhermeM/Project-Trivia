@@ -234,7 +234,6 @@ class Questions extends Component {
     );
   }
 }
-
 Questions.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
