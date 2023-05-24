@@ -9,3 +9,9 @@ export const submitLogin = (payload) => {
     payload: { ...rest, gravatarEmail },
   };
 };
+
+export const RESET_SCORE = 'RESET_SCORE';
+
+export const ResetScore = () => ({
+  type: RESET_SCORE,
+});
