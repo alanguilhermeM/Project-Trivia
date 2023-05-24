@@ -1,0 +1,9 @@
+#green {
+  background-color: green;
+  border: 3px solid rgb(6, 240, 15);
+}
+  
+#red.clicked {
+  background-color: red;
+  border: 3px solid red;
+}

@@ -9,3 +9,10 @@ export const submitLogin = (payload) => {
     payload: { ...rest, gravatarEmail },
   };
 };
+
+export const SCORE = 'SCORE';
+
+export const playerScore = (score) => ({
+  type: SCORE,
+  score,
+});

@@ -10,6 +10,13 @@ export default class Game extends Component {
       <div>
         <Header />
         <Questions history={ history } />
+        <button
+          data-testid="btn-ranking"
+          onClick={ () => history.push('/ranking') }
+        >
+          Ranking
+
+        </button>
       </div>
     );
   }
