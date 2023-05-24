@@ -125,6 +125,18 @@ class Questions extends Component {
     dispatchAction(score);
   };
 
+  nextBtn = () => {
+    const { perguntas, indiceAtual } = this.state;
+    if (indiceAtual < perguntas.length - 1) {
+      this.setState((prevState) => ({
+        indiceAtual: prevState.indiceAtual + 1,
+      }));
+    } else {
+      const { history } = this.props;
+      history.push('/feedback');
+    }
+  };
+
   shuffleArray = (array) => {
     const half = 0.5;
     return array.sort(() => half - Math.random());
@@ -201,7 +213,15 @@ class Questions extends Component {
           </div>
         ) : null}
         {
-          next ? <button data-testid="btn-next">Next</button> : (
+          next ? (
+            <button
+              onClick={ this.nextBtn }
+              data-testid="btn-next"
+            >
+              Next
+
+            </button>
+          ) : (
             <div>
               Time Remaining:
               {' '}
