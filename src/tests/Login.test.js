@@ -1,9 +1,8 @@
-import userEvent from '@testing-library/user-event';
 import React from "react";
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 import App from "../App";
-import '@testing-library/jest-dom/extend-expect';
 
 describe('Testa a página de Login', () => {
   beforeEach(() => {
@@ -61,5 +60,28 @@ describe('Testa a página de Login', () => {
     userEvent.click(buttonPlay);
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
+
+  test('Redireciona para a página de Configurações ao clicar no botão "Configurações"', () => {
+    renderWithRouterAndRedux(<App />);
+
+    const buttonSettings = screen.getByRole('button', { name: /Configurações/i });
+
+    userEvent.click(buttonSettings);
+
+    expect(screen.getByText(/Setting/i)).toBeInTheDocument();
+  });
+
+  test('Submete os dados do formulário ao clicar no botão "Play"', () => {
+    renderWithRouterAndRedux(<App />);
+
+    const inputName = screen.getByPlaceholderText(/Nome/i);
+    const inputEmail = screen.getByPlaceholderText(/Email/i);
+    const buttonPlay = screen.getByRole('button', { name: /Play/i });
+
+    userEvent.type(inputName, 'Ramily Carvalho');
+    userEvent.type(inputEmail, 'ramilycarvalho@gmail.com');
+    userEvent.click(buttonPlay);
+
   });
 });
