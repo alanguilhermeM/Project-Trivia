@@ -4,6 +4,24 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends Component {
+  state = {
+    profiles: JSON.parse(localStorage.getItem('profiles')) || [],
+  };
+
+  componentDidMount() {
+    const { name, gravatarEmail, score } = this.props;
+    const profile = { name, gravatarEmail, score };
+    this.setState(
+      (previous) => ({
+        profiles: [...previous.profiles, profile],
+      }),
+      () => {
+        const { profiles } = this.state;
+        localStorage.setItem('profiles', JSON.stringify(profiles));
+      },
+    );
+  }
+
   render() {
     const { assertions, score, history } = this.props;
     console.log(assertions);
@@ -47,6 +65,8 @@ class Feedback extends Component {
 const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
+  name: state.player.name,
+  gravatarEmail: state.player.gravatarEmail,
 });
 
 Feedback.propTypes = {

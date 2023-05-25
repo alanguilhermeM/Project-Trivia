@@ -9,7 +9,7 @@ class Ranking extends Component {
   };
 
   componentDidMount() {
-    const ranking = JSON.parse(localStorage.getItem('ranking'));
+    const ranking = JSON.parse(localStorage.getItem('profiles'));
     if (ranking) {
       this.setState({
         ranking,
