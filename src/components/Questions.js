@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { playerScore } from '../redux/actions';
+import { playerAssertions, playerScore } from '../redux/actions';
 
 class Questions extends Component {
   state = {
@@ -56,19 +56,8 @@ class Questions extends Component {
     }, START_COUNTDOWN);
   };
 
-  // goToNextQuestion = () => {
-  //   const { perguntas, indiceAtual } = this.state;
-  //   if (indiceAtual < perguntas.length - 1) {
-  //     this.setState((prevState) => ({
-  //       indiceAtual: prevState.indiceAtual + 1,
-  //     }));
-  //   } else {
-  //     const { history } = this.props;
-  //     history.push('/feedback');
-  //   }
-  // };
-
   handleClick = ({ target }) => {
+    const { assertionDispatch } = this.props;
     if (target.id === 'green') {
       const green = document.getElementById('green');
       green.style.backgroundColor = 'green';
@@ -80,6 +69,8 @@ class Questions extends Component {
       });
       this.scorePts();
       this.setState({ next: true });
+      const assertions = 1;
+      assertionDispatch(assertions);
     }
     if (target.className === 'red') {
       const index = parseInt(target.getAttribute('data-index'), 10);
@@ -239,11 +230,15 @@ Questions.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   dispatchAction: PropTypes.func.isRequired,
+  assertionDispatch: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchAction: (score) => {
     dispatch(playerScore(score));
+  },
+  assertionDispatch: (score) => {
+    dispatch(playerAssertions(score));
   },
 });
 

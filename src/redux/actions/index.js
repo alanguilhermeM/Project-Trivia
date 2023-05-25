@@ -21,3 +21,10 @@ export const RESET_SCORE = 'RESET_SCORE';
 export const ResetScore = () => ({
   type: RESET_SCORE,
 });
+
+export const ASSERTIONS = 'ASSERTIONS';
+
+export const playerAssertions = (assertions) => ({
+  type: ASSERTIONS,
+  assertions,
+});
